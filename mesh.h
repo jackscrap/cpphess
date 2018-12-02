@@ -10,7 +10,6 @@
 #include <glm/glm.hpp>
 
 #include "obj_loader.h"
-
 #include "util.h"
 #include "debugTimer.h"
 

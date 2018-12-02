@@ -28,7 +28,7 @@ int main() {
 	Disp disp(
 		sz["wd"],
 		sz["ht"],
-		"OpenGL"
+		"asdf"
 	);
 
 	Vtx vertices[] = {
