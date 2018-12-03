@@ -48,7 +48,7 @@ public:
 
 	void Update(
 		const Transform& transform,
-		const Camera& camera
+		const Cam& camera
 	) {
 		glm::mat4 MVP = transform.GetMVP(camera);
 		glm::mat4 Normal = transform.GetModel();

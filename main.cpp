@@ -9,7 +9,9 @@
 #include "shader.h"
 #include "texture.h"
 #include "transform.h"
-#include "camera.h"
+#include "cam.h"
+
+#include "col.h"
 
 static std::map<
 	std::string,
@@ -31,7 +33,7 @@ int main() {
 		"asdf"
 	);
 
-	Vtx vertices[] = {
+	Vtx vtx[] = {
 		Vtx(glm::vec3(-1, -1, -1), glm::vec2(1, 0), glm::vec3(0, 0, -1)),
 		Vtx(glm::vec3(-1, 1, -1), glm::vec2(0, 0), glm::vec3(0, 0, -1)),
 		Vtx(glm::vec3(1, 1, -1), glm::vec2(0, 1), glm::vec3(0, 0, -1)),
@@ -63,7 +65,14 @@ int main() {
 		Vtx(glm::vec3(1, 1, -1), glm::vec2(0, 1), glm::vec3(1, 0, 0)),
 	};
 
-	unsigned int indices[] = {
+	Vtx panelVtx[] = {
+		Vtx(glm::vec3(-1, -1, -1), glm::vec2(1, 0), glm::vec3(0, 0, -1)),
+		Vtx(glm::vec3(-1, 1, -1), glm::vec2(0, 0), glm::vec3(0, 0, -1)),
+		Vtx(glm::vec3(1, 1, -1), glm::vec2(0, 1), glm::vec3(0, 0, -1)),
+		Vtx(glm::vec3(1, -1, -1), glm::vec2(1, 1), glm::vec3(0, 0, -1)),
+	};
+
+	unsigned int idc[] = {
 		0, 1, 2,
 		0, 2, 3,
 
@@ -83,12 +92,25 @@ int main() {
 		23, 22, 20
 	};
 
+	unsigned int panelIdc[] = {
+		0, 1, 2,
+		0, 2, 3
+	};
+
 	Mesh mesh(
-		vertices,
-		sizeof vertices / sizeof vertices[0],
-		indices,
-		sizeof indices / sizeof indices[0]
+		vtx,
+		sizeof vtx / sizeof vtx[0],
+		idc,
+		sizeof idc / sizeof idc[0]
 	);
+
+	Mesh panel(
+		panelVtx,
+		sizeof panelVtx / sizeof panelVtx[0],
+		idc,
+		sizeof panelIdc / sizeof panelIdc[0]
+	);
+
 	Mesh monkey(
 		"res/monkey3.obj"
 	);
@@ -99,7 +121,7 @@ int main() {
 		"res/bricks.jpg"
 	);
 	Transform transform;
-	Camera camera(
+	Cam cam(
 		glm::vec3(
 			0.0f,
 			0.0f,
@@ -112,19 +134,19 @@ int main() {
 	);
 
 	SDL_Event e;
-	bool isRunning = true;
-	float counter = 0.0f;
-	while(isRunning) {
+	bool run = true;
+	float counter = 0;
+	while(run) {
 		while(SDL_PollEvent(&e)) {
 			if (e.type == SDL_QUIT) {
-				isRunning = false;
+				run = false;
 			}
 		}
 
 		disp.Clear(
-			0.0f,
-			0.0f,
-			0.0f,
+			(col["purple0"][0] / 256.0),
+			(col["purple0"][1] / 256.0),
+			(col["purple0"][2] / 256.0),
 			1.0f
 		);
 
@@ -142,13 +164,17 @@ int main() {
 		texture.Bind();
 		shader.Update(
 			transform,
-			camera
+			cam
 		);
-		monkey.Draw();
+		/* mesh.Draw(); */
+		/* monkey.Draw(); */
+		panel.Draw();
 
 		disp.SwapBuffers();
-		SDL_Delay(1);
-		counter += 0.01f;
+		SDL_Delay(
+			1
+		);
+		/* counter += 0.001f; */
 	}
 
 	return 0;

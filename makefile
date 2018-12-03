@@ -1,12 +1,13 @@
 CC = g++
+V = -std=c++17
 
-DEPS = main.cpp mesh.h disp.h camera.h shader.h texture.h obj_loader.h obj_loader.cpp
+DEP = main.cpp mesh.h disp.h cam.h shader.h texture.h obj_loader.h obj_loader.cpp stb_image.c
 
 GLEW = -lGLEW -lGL
 SDL = -lSDL2
 
 make: main.cpp
-	$(CC) $(DEPS) $(GLEW) $(SDL) -std=c++11 stb_image.c
+	$(CC) $(V) $(DEP) $(GLEW) $(SDL)
 
 clean:
 	rm *.out
