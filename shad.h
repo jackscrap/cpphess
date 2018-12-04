@@ -52,8 +52,8 @@ public:
 		const Trans& trans,
 		const Cam& camera
 	) {
-		glm::mat4 MVP = trans.GetMVP(camera);
-		glm::mat4 Normal = trans.GetModel();
+		glm::mat4 MVP = trans.getMvp(camera);
+		glm::mat4 Normal = trans.getModel();
 
 		glUniformMatrix4fv(m_uniforms[0], 1, GL_FALSE, &MVP[0][0]);
 		glUniformMatrix4fv(m_uniforms[1], 1, GL_FALSE, &Normal[0][0]);

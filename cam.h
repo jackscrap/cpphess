@@ -5,7 +5,7 @@
 
 struct Cam {
 	private:
-		glm::mat4 projection;
+		glm::mat4 proj;
 		glm::vec3 pos;
 		glm::vec3 forward;
 		glm::vec3 up;
@@ -29,7 +29,7 @@ struct Cam {
 				1.0f,
 				0.0f
 			);
-			this->projection = glm::perspective(
+			this->proj = glm::perspective(
 				fov,
 				aspect,
 				zNear,
@@ -37,9 +37,9 @@ struct Cam {
 			);
 		}
 
-		inline glm::mat4 GetViewProjection(
+		inline glm::mat4 getViewProj(
 		) const {
-			return projection * glm::lookAt(
+			return proj * glm::lookAt(
 				pos,
 				pos + forward,
 				up

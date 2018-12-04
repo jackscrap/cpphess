@@ -50,6 +50,8 @@ enum MeshBufferpos {
 
 class Mesh {
 	public:
+		int asdf = 3;
+
 		Mesh(const Mesh& mesh) {
 		}
 
@@ -72,9 +74,15 @@ class Mesh {
 				i < numVertices;
 				i++
 			) {
-				model.pos.push_back(*vertices[i].GetPos());
-				model.texCoord.push_back(*vertices[i].GetTexCoord());
-				model.norms.push_back(*vertices[i].GetNormal());
+				model.pos.push_back(
+					*vertices[i].GetPos()
+				);
+				model.texCoord.push_back(
+					*vertices[i].GetTexCoord()
+				);
+				model.norms.push_back(
+					*vertices[i].GetNormal()
+				);
 			}
 			
 			for (
