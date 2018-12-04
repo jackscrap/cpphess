@@ -201,10 +201,10 @@ int main() {
 	Mesh monkey(
 		"obj/cube.obj"
 	);
-	Shad shad(
+	Shad checker(
 		"res/purple/purple"
 	);
-	Tex texture(
+	Tex tex(
 		"res/bricks.jpg"
 	);
 	Trans trans;
@@ -224,7 +224,9 @@ int main() {
 	bool run = true;
 	float counter = 0;
 	while(run) {
-		while(SDL_PollEvent(&e)) {
+		while(SDL_PollEvent(
+			&e
+		)) {
 			if (e.type == SDL_QUIT) {
 				run = false;
 			}
@@ -247,9 +249,9 @@ int main() {
 
 		trans.getRot()->y = counter * 100;
 
-		shad.Bind();
-		texture.Bind();
-		shad.Update(
+		checker.bind();
+		tex.bind();
+		checker.update(
 			trans,
 			cam
 		);
@@ -265,12 +267,10 @@ int main() {
 		monkey.draw();
 		/* tile.draw(); */
 
-		disp.swpBuff(
-		);
+		disp.swpBuff();
 		SDL_Delay(
 			1
 		);
-		/* counter += 0.001f; */
 	}
 
 	return 0;

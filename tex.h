@@ -80,7 +80,7 @@ class Tex {
 			);
 		}
 
-		void Bind() {
+		void bind() {
 			glBindTexture(GL_TEXTURE_2D, tex);
 		}
 

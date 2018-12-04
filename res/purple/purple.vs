@@ -1,18 +1,23 @@
-#version 150
+varying vec2 texCoord;
 
-attribute vec3 pos;
-attribute vec2 texCoord;
-attribute vec3 norm;
+void main(void) {
+	gl_Position = vec4(
+		gl_Vertex.xy,
+		0.0,
+		1.0
+	);
+	gl_Position = sign(
+		gl_Position
+	);
 
-varying vec2 texCoord0;
-varying vec3 normal0;
-
-uniform mat4 MVP;
-uniform mat4 Normal;
-
-void main() {
-	gl_Position = MVP * vec4(pos, 1.0);
-
-	texCoord0 = texCoord;
-	normal0 = (Normal * vec4(norm, 0.0)).xyz;
+	texCoord = (
+		vec2(
+			gl_Position.x,
+			gl_Position.y
+		) + vec2(
+			5.0
+		)
+	) / vec2(
+		40.0
+	);
 }
