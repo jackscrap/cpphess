@@ -5,35 +5,35 @@
 
 #include "stb_image.h"
 
-class Texture {
+class Tex {
 	public:
-		Texture(
-			const std::string& fileName
+		Tex(
+			const std::string& fName
 		) {
 			int
-				width,
-				height,
-				numComponents;
+				wd,
+				ht,
+				noComp;
 
 			unsigned char* data = stbi_load(
-				fileName.c_str(),
-				&width,
-				&height,
-				&numComponents,
+				fName.c_str(),
+				&wd,
+				&ht,
+				&noComp,
 				4
 			);
 
 			if (!data) {
-				std::cerr << "Unable to load texture: " << fileName << std::endl;
+				std::cerr << "Unable to load texture: " << fName << std::endl;
 			}
 					
 			glGenTextures(
 				1,
-				&m_texture
+				&tex
 			);
 			glBindTexture(
 				GL_TEXTURE_2D,
-				m_texture
+				tex
 			);
 					
 			glTexParameteri(
@@ -61,28 +61,33 @@ class Texture {
 				GL_TEXTURE_2D,
 				0,
 				GL_RGBA,
-				width,
-				height,
+				wd,
+				ht,
 				0,
 				GL_RGBA,
 				GL_UNSIGNED_BYTE,
 				data
 			);
-			stbi_image_free(data);
+			stbi_image_free(
+				data
+			);
 		}
 
-		~Texture() {
-			glDeleteTextures(1, &m_texture);
+		~Tex() {
+			glDeleteTextures(
+				1,
+				&tex
+			);
 		}
 
 		void Bind() {
-			glBindTexture(GL_TEXTURE_2D, m_texture);
+			glBindTexture(GL_TEXTURE_2D, tex);
 		}
 
 	private:
-		Texture(
-			const Texture& texture
+		Tex(
+			const Tex& tex
 		);
 
-		GLuint m_texture;
+		GLuint tex;
 };

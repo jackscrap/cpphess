@@ -8,7 +8,7 @@
 #include "disp.h"
 #include "mesh.h"
 #include "shad.h"
-#include "texture.h"
+#include "tex.h"
 #include "trans.h"
 #include "cam.h"
 
@@ -263,7 +263,7 @@ int main() {
 	Shad shad(
 		"res/basicShader"
 	);
-	Texture texture(
+	Tex texture(
 		"res/bricks.jpg"
 	);
 	Trans trans;
@@ -323,9 +323,11 @@ int main() {
 		/* 	board[i].draw(); */
 		/* } */
 
-		mesh.draw();
+		mesh.draw(
+		);
 
-		disp.SwapBuffers();
+		disp.swpBuff(
+		);
 		SDL_Delay(
 			1
 		);
