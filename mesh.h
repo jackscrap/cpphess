@@ -98,7 +98,7 @@ class Mesh {
 			glDeleteVertexArrays(1, &m_vertexArrayObject);
 		}
 
-		void Draw() {
+		void draw() {
 			glBindVertexArray(
 				m_vertexArrayObject
 			);

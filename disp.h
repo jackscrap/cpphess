@@ -45,7 +45,7 @@ class Disp {
 			SDL_Quit();
 		}
 
-		void Clear(
+		void clear(
 			float r,
 			float g,
 			float b,
